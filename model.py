@@ -1,8 +1,7 @@
 
 # coding: utf-8
 
-# In[27]:
-
+# In[1]:
 
 ##############################################################
 #### Picking up Dataset provided by Udacity to train model ###
@@ -39,8 +38,7 @@ def data_Files(mypath):
 print('All files downloaded and extracted')
 
 
-# In[29]:
-
+# In[2]:
 
 #Importing Required libraries to make the model work
 import os
@@ -81,8 +79,7 @@ with open('./My Data/2/driving_log.csv') as csvfile:
 print("Done")
 
 
-# In[30]:
-
+# In[3]:
 
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
@@ -90,8 +87,7 @@ from sklearn.model_selection import train_test_split
 train_samples, validation_samples = train_test_split(samples,test_size=0.15) #simply splitting the dataset to train and validation set usking sklearn. .15 indicates 15% of the dataset is validation set
 
 
-# In[31]:
-
+# In[4]:
 
 import cv2
 import numpy as np
@@ -154,8 +150,7 @@ validation_generator = generator(validation_samples, batch_size=32)
 
 
 
-# In[32]:
-
+# In[7]:
 
 
 from keras.models import Sequential
@@ -198,9 +193,13 @@ model.add(Flatten())
 model.add(Dense(100))
 model.add(Activation('elu'))
 
+#Adding a dropout layer to avoid overfitting. Here we are have given the dropout rate as 25% after first fully connected layer
+model.add(Dropout(0.25))
+
 #layer 7- fully connected layer 1
 model.add(Dense(50))
 model.add(Activation('elu'))
+
 
 #layer 8- fully connected layer 1
 model.add(Dense(10))
@@ -228,4 +227,9 @@ print('Done! Model Saved!')
 
 # keras method to print the model summary
 model.summary()
+
+
+# In[ ]:
+
+
 
